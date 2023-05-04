@@ -4,6 +4,7 @@ import {
   MOVE_CLOCKWISE,
   MOVE_COUNTERCLOCKWISE,
   SET_QUIZ_INTO_STATE,
+  SET_SELECTED_ANSWER,
 } from './action-types'
 
 export function moveClockwise () { 
@@ -18,7 +19,12 @@ export function moveCounterClockwise() {
   }
 }
 
-export function selectAnswer() { }
+export function selectAnswer( answer ) { 
+  return {
+    type: SET_SELECTED_ANSWER,
+    payload: answer
+  }
+}
 
 export function setMessage() { }
 
