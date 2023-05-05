@@ -6,6 +6,7 @@ import {
   MOVE_COUNTERCLOCKWISE,
   SET_QUIZ_INTO_STATE,
   SET_SELECTED_ANSWER,
+  POST_ANSWER_QUIZ
 } from './action-types' ; 
 
 const initialWheelState = 0
@@ -68,6 +69,27 @@ function selectedAnswer(state = initialSelectedAnswerState, action) {
   
 }
 
+const payload = {
+  quiz_id:"", 
+  answer_id:"", 
+}
+
+function postPayloadAnswer ( state = payload, action) {
+  switch(action.type) {
+
+    case(POST_ANSWER_QUIZ): {
+      return {
+        ...state,
+        quiz_id: action.payload,
+        answer_id: action.payload,
+      }
+    }
+
+    default:
+      return state 
+  }
+}
+
 const initialMessageState = ''
 
 function infoMessage(state = initialMessageState, action) {
@@ -84,4 +106,4 @@ function form(state = initialFormState, action) {
   return state
 }
 
-export default combineReducers({ wheel, quiz, selectedAnswer, infoMessage, form })
+export default combineReducers({ wheel, quiz, selectedAnswer, infoMessage, form,postPayloadAnswer })

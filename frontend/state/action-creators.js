@@ -5,6 +5,8 @@ import {
   MOVE_COUNTERCLOCKWISE,
   SET_QUIZ_INTO_STATE,
   SET_SELECTED_ANSWER,
+  SET_INFO_MESSAGE,
+  POST_ANSWER_QUIZ,
 } from './action-types'
 
 export function moveClockwise () { 
@@ -26,7 +28,12 @@ export function selectAnswer( answer ) {
   }
 }
 
-export function setMessage() { }
+export function setMessage ( message ) {
+  return {
+    type : SET_INFO_MESSAGE,
+    payload : message
+  }
+ }
 
 export function setQuiz ( getQuiz ) {
     return {
@@ -35,6 +42,12 @@ export function setQuiz ( getQuiz ) {
     }
  }
 
+export function post ( postpayload ) {
+  return {
+    type : POST_ANSWER_QUIZ,
+    payload: postpayload
+  }
+}
 export function inputChange() { }
 
 export function resetForm() { }
@@ -63,13 +76,26 @@ export function fetchQuiz () {
 }
 
 export function postAnswer() {
+
   return function (dispatch) {
+    axios.post('http://localhost:9000/api/quiz/answer', dispatch(post))
+      .then( res => {
+        dispatch(selectAnswer(null))
+        dispatch( setMessage(res.data.message))
+        dispatch( fetchQuiz() )
+      })
+      .catch (
+        (err) => {
+          console.log(err)
+        }
+      )
+    }
     // On successful POST:
     // - Dispatch an action to reset the selected answer state
     // - Dispatch an action to set the server message to state
     // - Dispatch the fetching of the next quiz
   }
-}
+
 
 export function postQuiz() {
   return function (dispatch) {
