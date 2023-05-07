@@ -95,7 +95,7 @@ function form(state = initialFormState, action) {
   switch(action.type){
     case(INPUT_CHANGE):{
       return {
-        newQuestion: action.payload,
+        newQuestion : action.payload,
         newTrueAnswer: action.payload,
         newFalseAnswer: action.payload
       }
