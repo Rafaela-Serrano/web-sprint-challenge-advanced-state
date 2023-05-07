@@ -7,6 +7,7 @@ import {
   SET_QUIZ_INTO_STATE,
   SET_SELECTED_ANSWER,
   SET_INFO_MESSAGE,
+  INPUT_CHANGE
 } from './action-types'
 
 export function moveClockwise () { 
@@ -42,7 +43,12 @@ export function setQuiz ( getQuiz ) {
     }
  }
 
-export function inputChange() { }
+export function inputChange( input ) {
+  return {
+    type: INPUT_CHANGE,
+    payload: input 
+  }
+ }
 
 export function resetForm() { }
 
@@ -92,8 +98,17 @@ export function postAnswer( payload ) {
   }
 
 
-export function postQuiz() {
+export function postQuiz( payload ) {
   return function (dispatch) {
+    axios.post('http://localhost:9000/api/quiz/new', payload )
+    .then( res => {
+      console.log(res)
+    })
+    .catch( err => {
+      console.log(err)
+    }
+
+    )
     // On successful POST:
     // - Dispatch the correct message to the the appropriate state
     // - Dispatch the resetting of the form

@@ -7,6 +7,7 @@ import {
   SET_QUIZ_INTO_STATE,
   SET_SELECTED_ANSWER,
   SET_INFO_MESSAGE,
+  INPUT_CHANGE
 } from './action-types' ; 
 
 const initialWheelState = 0
@@ -91,7 +92,17 @@ const initialFormState = {
 }
 
 function form(state = initialFormState, action) {
-  return state
+  switch(action.type){
+    case(INPUT_CHANGE):{
+      return {
+        newQuestion: action.payload,
+        newTrueAnswer: action.payload,
+        newFalseAnswer: action.payload
+      }
+    }
+    default:
+      return state
+  }
 }
 
 export default combineReducers({ wheel, quiz, selectedAnswer, infoMessage, form })
