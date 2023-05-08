@@ -7,7 +7,8 @@ import {
   SET_QUIZ_INTO_STATE,
   SET_SELECTED_ANSWER,
   SET_INFO_MESSAGE,
-  INPUT_CHANGE
+  INPUT_CHANGE,
+  RESET_FORM
 } from './action-types' ; 
 
 const initialWheelState = 0
@@ -86,23 +87,46 @@ function infoMessage(state = initialMessageState, action) {
 }
 
 const initialFormState = {
-  newQuestion: '',
-  newTrueAnswer: '',
-  newFalseAnswer: '',
+  newQuestion:'',
+  newTrueAnswer:'',
+  newFalseAnswer:'',
 }
 
 function form(state = initialFormState, action) {
   switch(action.type){
     case(INPUT_CHANGE):{
-      return {
-        newQuestion : action.payload,
-        newTrueAnswer: action.payload,
-        newFalseAnswer: action.payload
+
+      if ("newQuestion" === action.payload2 ) {
+        return {
+          ...state,
+          newQuestion: action.payload1
+        } 
+      } else if ("newTrueAnswer" === action.payload2) {
+        return {
+          ...state,
+          newTrueAnswer: action.payload1
+        }
+      } else {
+        return {
+          ...state,
+          newFalseAnswer: action.payload1
+        }
       }
+    }
+
+    default:
+      return state
+  }
+}
+
+function reset (state=initialFormState, action) {
+  switch(action.type){
+    case(RESET_FORM):{
+      return state
     }
     default:
       return state
   }
 }
 
-export default combineReducers({ wheel, quiz, selectedAnswer, infoMessage, form })
+export default combineReducers({ wheel, quiz, selectedAnswer, infoMessage, form, reset})

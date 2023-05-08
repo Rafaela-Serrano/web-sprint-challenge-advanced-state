@@ -38,7 +38,7 @@ const  Quiz = (props) =>  {
               <button 
                  onClick= { () => props.selectAnswer( props.quiz.answers[0].answer_id) } >
 
-                  {props.selectedAnswer === props.quiz.answers[0].answer_id ? "SELECT" : "Select"}
+                  {props.selectedAnswer === props.quiz.answers[0].answer_id ? "SELECTED" : "Select"}
 
               </button>
 
@@ -58,7 +58,7 @@ const  Quiz = (props) =>  {
               
                 onClick={ () => props.selectAnswer( props.quiz.answers[1].answer_id) } >
 
-                 { props.selectedAnswer === props.quiz.answers[1].answer_id ? "SELECT" : "Select"}
+                 { props.selectedAnswer === props.quiz.answers[1].answer_id ? "SELECTED" : "Select"}
 
               </button>
 

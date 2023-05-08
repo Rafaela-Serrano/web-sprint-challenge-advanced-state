@@ -7,7 +7,8 @@ import {
   SET_QUIZ_INTO_STATE,
   SET_SELECTED_ANSWER,
   SET_INFO_MESSAGE,
-  INPUT_CHANGE
+  INPUT_CHANGE,
+  RESET_FORM
 } from './action-types'
 
 export function moveClockwise () { 
@@ -43,14 +44,19 @@ export function setQuiz ( getQuiz ) {
     }
  }
 
-export function inputChange( input ) {
+export function inputChange( input, id ) {
   return {
     type: INPUT_CHANGE,
-    payload: input 
+    payload1: input,
+    payload2: id
   }
  }
 
-export function resetForm() { }
+export function resetForm() { 
+  return {
+    type: RESET_FORM
+  }
+}
 
 // ❗ Async action creators
 
@@ -103,9 +109,11 @@ export function postQuiz( payload ) {
     axios.post('http://localhost:9000/api/quiz/new', payload )
     .then( res => {
       console.log(res)
+      dispatch(setMessage(`Congrats: "${res.data.question}" is a great question!`))
+      dispatch(resetForm())
     })
     .catch( err => {
-      console.log(err)
+      dispatch(setMessage("Posting Quiz error"))
     }
 
     )
