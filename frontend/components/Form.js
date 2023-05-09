@@ -19,7 +19,7 @@ export function Form(props) {
   }
 
   return (
-    <form id="form" onSubmit={onSubmit}>
+    <form id="form" onSubmit={onSubmit }>
 
       <h2>Create New Quiz</h2>
       <input maxLength={50} onChange={onChange} id="newQuestion" placeholder="Enter question" value={props.form.newQuestion} />
@@ -28,7 +28,7 @@ export function Form(props) {
 
 
       {
-        props.form.newQuestion && props.form.newTrueAnswer && props.form.newFalseAnswer ? 
+        props.form.newQuestion.trim() && props.form.newTrueAnswer.trim()&& props.form.newFalseAnswer.trim() ? 
         <button id="submitNewQuizBtn" >Submit new quiz</button> 
         : 
         <button id="submitNewQuizBtn" disabled >Submit new quiz</button>

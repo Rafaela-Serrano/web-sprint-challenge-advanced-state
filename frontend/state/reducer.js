@@ -113,20 +113,18 @@ function form(state = initialFormState, action) {
         }
       }
     }
-
-    default:
-      return state
-  }
-}
-
-function reset (state=initialFormState, action) {
-  switch(action.type){
     case(RESET_FORM):{
-      return state
+      return {
+        ...state,
+        newQuestion:'',
+        newTrueAnswer:'',
+        newFalseAnswer:'',
+      }
     }
+
     default:
       return state
   }
 }
 
-export default combineReducers({ wheel, quiz, selectedAnswer, infoMessage, form, reset})
+export default combineReducers({ wheel, quiz, selectedAnswer, infoMessage, form})

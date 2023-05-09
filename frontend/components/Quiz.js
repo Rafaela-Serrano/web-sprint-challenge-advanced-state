@@ -10,10 +10,11 @@ import { useEffect } from 'react'
 
 const  Quiz = (props) =>  {
 
-   useEffect ( () => {
+   useEffect ( () => { 
+    if (props.quiz === null) {
     props.fetchQuiz()
-
-   } , [])
+    }
+   }, [])
 
   return (
     <div id="wrapper">
